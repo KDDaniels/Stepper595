@@ -31,7 +31,7 @@
 /**
  * @brief Construct a new Stepper595 object
 
- * @param CS_PIN {int} CS/latch pin
+ * @param CS_PIN {unsigned char} CS/latch pin
  */
 Stepper595::Stepper595(unsigned char CS_PIN)
 {
@@ -75,7 +75,7 @@ void Stepper595::initialize()
 /**
  * @brief Sets the delay amount between steps
  * 
- * @param amount {int} Delay time in milliseconds (max:256)
+ * @param amount {unsigned char} Delay time in milliseconds (max:256)
  */
 void Stepper595::setDelay(unsigned char amount)
 {
@@ -129,3 +129,36 @@ bool Stepper595::step(bool motor, bool dir)
 
     return false;
 }
+
+/**
+ * @brief Sends 0b00000000 to the shift register to disable all control signals for both motors
+ */
+void Stepper595::stop()
+{
+    digitalWrite(_latch, LOW);
+    SPI.transfer(0b00000000);
+    digitalWrite(_latch, HIGH);
+}
+
+/**
+ * @brief Disables specific control signals for one motor
+ * 
+ * @param motor {bool} The motor to disable
+ */
+void Stepper595::stop(bool motor=0)
+{
+    if (!motor) // MOTOR_1
+    {
+        digitalWrite(_latch, LOW);
+        SPI.transfer(0b0000);
+        digitalWrite(_latch, HIGH);
+    }
+    else // MOTOR_2
+    {
+        digitalWrite(_latch, LOW);
+        SPI.transfer(0b0000 << 4); // I know it's the same as calling stop() but it's clearer this way (I think)
+        digitalWrite(_latch, HIGH);
+    }
+}
+
+

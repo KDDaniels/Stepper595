@@ -56,7 +56,7 @@ public:
     /**
      * @brief Construct a new Stepper595 object
      * 
-     * @param CS_PIN {int} CS/latch pin; can be anything
+     * @param CS_PIN {unsigned char} CS/latch pin; can be anything
      */
     Stepper595(unsigned char CS_PIN);
 
@@ -80,9 +80,21 @@ public:
      * @brief Set the delay amount between steps.
      * Default val: 10ms
      * 
-     * @param amount {int} ms between steps
+     * @param amount {uint8_t} ms between steps
      */
     void setDelay(uint8_t amount);
+
+    /**
+     * @brief Disables all control signals
+     */
+    void stop();
+
+    /**
+     * @brief Disables control signals to a specific motor
+     * 
+     * @param motor {bool} motor to disable
+     */
+    void stop(bool motor);
 
 
 private:
