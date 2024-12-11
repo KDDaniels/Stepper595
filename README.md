@@ -1,6 +1,9 @@
 # Stepper595
 
-Simple stepper motor driver library utilizing SPI to send control signals through a shift register. Features include:
+Simple stepper motor driver library utilizing SPI to send control signals through a shift register.\
+Mainly built for the ATtiny line of microcontrollers but works with Arduino and ESP32 boards (probably more)
+
+## Features include:
 - Adjustable delay to enable different motor speeds
 - Non-blocking code
 - Returns true after each step to allow for accurate step counting (can be used without caring about this)
