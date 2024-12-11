@@ -34,20 +34,20 @@
 Stepper595 stepper(LATCH_PIN);
 
 int steps = 0;
-bool dir = 0;
+bool dir = CW;
 
 void setup()
 {}
 
 void loop()
 {
-    if (stepper.step(0, dir) ) 
+    if (stepper.step(MOTOR_1, dir) ) 
     { dir ? steps++ : steps--; }
 
     if ( steps / 100 >= 2 ) { stepper.setDelay(steps / 100); }
 
-    if ( steps > 2000 ) 
-    { dir = 1; }
+    if ( steps > 1000 ) 
+    { dir = CCW; }
     else if ( steps == 0 )
-    { dir = 0; }
+    { dir = CW; }
 }

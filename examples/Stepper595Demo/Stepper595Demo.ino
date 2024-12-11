@@ -43,14 +43,14 @@ void setup()
 void loop()
 {
     while (steps < 1000)
-    { if ( stepper.step(0, 0) ) steps++; }
+    { if ( stepper.step(MOTOR_1, CW) ) steps++; }
     
     while (steps > 0)
-    { if ( stepper.step(0, 1) ) steps--; }
+    { if ( stepper.step(MOTOR_1, CCW) ) steps--; }
 
     while (steps < 1000) 
-    { if ( stepper.step(1, 0) ) steps++; }
+    { if ( stepper.step(MOTOR_2, CW) ) steps++; }
 
     while (steps > 0)
-    { if ( stepper.step(1, 1) ) steps--; }
+    { if ( stepper.step(MOTOR_2, CCW) ) steps--; }
 }
