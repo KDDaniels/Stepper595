@@ -30,7 +30,7 @@
 
 #include <Stepper595.hpp>
 
-const char LATCH_PIN = 4;
+#define LATCH_PIN 4
 Stepper595 stepper(LATCH_PIN);
 
 int steps = 0;
