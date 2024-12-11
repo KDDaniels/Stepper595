@@ -44,8 +44,21 @@ void loop()
 }
 ```
 
+# Functions overview
+- `Stepper595.step(motor, direction)`
+    - steps the motor by a single step
+    - motor = **MOTOR_1** or **MOTOR_2** ( 0 or 1 )
+    - direction = **CCW** or **CW** ( 0 or 1 )
+    - returns *true* if step has occured, though this can be ignored if not needed (useful for counting steps)
+- `Stepper595.setDelay(delay)`
+    - sets the delay between steps in *milliseconds*
+    - maximum delay is **255** ( essentially 4 steps a second, ***very*** slow )
+- `Stepper595.stop(motor)`
+    - argument is **optional**
+    - motor = **MOTOR_1** or **MOTOR_2** ( 0 or 1 )
+    - with no argument (`Stepper595.stop()`) it will disable all control signals
+
 # Hardware
 - Microcontroller or dev board with SPI support
 - Stepper motor driver w/ board (optional)
 - Stepper motor
-
