@@ -14,6 +14,7 @@ Stepper595	KEYWORD1
 
 step        KEYWORD2
 setDelay    KEYWORD2
+stop        KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
