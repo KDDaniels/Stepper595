@@ -38,6 +38,12 @@
 
 #include <Arduino.h>
 
+#define MOTOR_1 0
+#define MOTOR_2 1
+
+#define CCW 0
+#define CW 1
+
 /**
  * @class Stepper595
  * @brief This class controls up to two stepper motors through a 74HC595 shift register by utilizing SPI.

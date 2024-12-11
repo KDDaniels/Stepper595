@@ -96,7 +96,7 @@ bool Stepper595::step(bool motor, bool dir)
     {
         _data = _pattern[_currentStep[motor]];
 
-        if (motor == 1)
+        if (motor == MOTOR_2)
         {
             _data = _data << 4;
         }
@@ -105,7 +105,7 @@ bool Stepper595::step(bool motor, bool dir)
         SPI.transfer(_data);
         digitalWrite(_latch, HIGH);
     
-        if (dir == 0) // CCW
+        if (dir == CCW)
         {
             _currentStep[motor]++;
             if (_currentStep[motor] > 3)
@@ -113,7 +113,7 @@ bool Stepper595::step(bool motor, bool dir)
                 _currentStep[motor] = 0;
             }
         }
-        else if (dir == 1) // CW
+        else if (dir == CW)
         {
             if (_currentStep[motor] == 0)
             {
