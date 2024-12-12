@@ -32,13 +32,15 @@
 
 #include <Stepper595.hpp>
 
-#define LATCH_PIN 4
+#define LATCH_PIN 0
 Stepper595 stepper(LATCH_PIN);
 
 int steps = 0;
 
 void setup()
-{}
+{
+  DDRB |= (1 << PB0);
+}
 
 void loop()
 {
