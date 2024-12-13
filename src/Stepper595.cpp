@@ -22,7 +22,7 @@
 
 #include "Stepper595.hpp"
 
-#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny84__)
+#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny25__) || defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny24__)
     #include <tinySPI.h>
 #else
     #include <SPI.h>
@@ -58,6 +58,8 @@ Stepper595::~Stepper595()
  */
 void Stepper595::initialize()
 {
+    SPI.begin();
+
     _data = 0;
     for (char i = 0; i < 2; i++)
     {
@@ -66,9 +68,7 @@ void Stepper595::initialize()
     }
 
     pinMode(_latch, OUTPUT);
-
     digitalWrite(_latch, HIGH);
-    SPI.begin();
 }
 
 
