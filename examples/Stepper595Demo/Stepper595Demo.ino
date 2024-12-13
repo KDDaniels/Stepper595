@@ -27,7 +27,7 @@
 *
 *   This example shows basic use cases for this library
 *   The first motor rotates CCW 1000 steps, then CW 1000 steps
-*   then the second motor does the sames
+*   then the second motor does the same
 */
 
 #include <Stepper595.hpp>
@@ -38,9 +38,7 @@ Stepper595 stepper(LATCH_PIN);
 int steps = 0;
 
 void setup()
-{
-  DDRB |= (1 << PB0);
-}
+{}
 
 void loop()
 {
