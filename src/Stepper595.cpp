@@ -31,9 +31,9 @@
 /**
  * @brief Construct a new Stepper595 object
 
- * @param CS_PIN {unsigned char} CS/latch pin
+ * @param CS_PIN {uint8_t} CS/latch pin
  */
-Stepper595::Stepper595(unsigned char CS_PIN)
+Stepper595::Stepper595(uint8_t CS_PIN)
 {
     _latch = CS_PIN;
 
@@ -61,7 +61,7 @@ void Stepper595::initialize()
     SPI.begin();
 
     _data = 0;
-    for (char i = 0; i < 2; i++)
+    for (uint8_t i = 0; i < 2; i++)
     {
         _currentStep[i] = 0;
         _targetMillis[i] = millis();
@@ -75,9 +75,9 @@ void Stepper595::initialize()
 /**
  * @brief Sets the delay amount between steps
  * 
- * @param amount {unsigned char} Delay time in milliseconds (max:256)
+ * @param amount {uint8_t} Delay time in milliseconds (max:256)
  */
-void Stepper595::setDelay(unsigned char amount)
+void Stepper595::setDelay(uint8_t amount)
 {
     if (amount > 256) return;
     _delayAmount = amount;

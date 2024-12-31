@@ -56,9 +56,9 @@ public:
     /**
      * @brief Construct a new Stepper595 object
      * 
-     * @param CS_PIN {unsigned char} CS/latch pin; can be anything
+     * @param CS_PIN {uint8_t} CS/latch pin; can be anything
      */
-    Stepper595(unsigned char CS_PIN);
+    Stepper595(uint8_t CS_PIN);
 
     /**
      * @brief Destroy the Stepper 595 object and end SPI communication
@@ -101,21 +101,21 @@ private:
 
     void initialize();
 
-    unsigned char _latch;
-    unsigned char _dataPin;
-    unsigned char _clkPin;
+    uint8_t _latch;
+    uint8_t _dataPin;
+    uint8_t _clkPin;
 
     unsigned long _currentMillis;
     unsigned long _targetMillis[2];
-    unsigned char _delayAmount;
+    uint8_t _delayAmount;
 
-    char _currentStep[2];
+    uint8_t _currentStep[2];
 
-    unsigned char _data;
-    unsigned char _pattern[4] = {0b1001,
-                                 0b1100,
-                                 0b0110,
-                                 0b0011};
+    uint8_t _data;
+    uint8_t _pattern[4] = { 0b1001,
+                            0b1100,
+                            0b0110,
+                            0b0011 };
 };
 
 #endif
