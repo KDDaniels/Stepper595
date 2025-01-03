@@ -38,6 +38,7 @@ Stepper595::Stepper595(uint8_t CS_PIN)
     _latch = CS_PIN;
 
     _currentMillis = millis();
+    _targetMillisBoth = 0;
     _delayAmount = 2;
 
     this -> initialize();
@@ -128,6 +129,42 @@ bool Stepper595::step(bool motor, bool dir)
     }
 
     return false;
+}
+
+bool Stepper595::step(bool dir)
+{
+    if (long(millis()) - long(_targetMillisBoth) >= 0)
+    {
+        _data = _pattern[_currentStep[0]];
+        _data = (_data << 4 ) | _data; // Shift data over 4 bits and then OR the data onto the end to end up with 0b10011001 or whatever
+
+        digitalWrite(_latch, LOW);
+        SPI.transfer(_data);
+        digitalWrite(_latch, HIGH);
+    
+        if (dir == CCW)
+        {
+            _currentStep[0]++;
+            if (_currentStep[0] > 3)
+            {
+                _currentStep[0] = 0;
+            }
+        }
+        else if (dir == CW)
+        {
+            if (_currentStep[0] == 0)
+            {
+                _currentStep[0] = 4;
+            }
+            _currentStep[0]--;
+        }
+
+        _targetMillisBoth = long(millis()) + long(_delayAmount);
+        
+        return true;
+    }
+
+    return false;    
 }
 
 /**

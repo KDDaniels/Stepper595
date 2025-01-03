@@ -72,8 +72,20 @@ public:
      * 
      * @param motor {bool} Which register pins to control; { 0=ABCD, 1=EFGH }
      * @param dir {bool} Which direction to step; { 0 = CCW, 1 = CW }
+     * @return true if step happened
+     * @return false if step didn't happen
      */
     bool step(bool motor, bool dir);
+
+
+    /**
+     * @brief Steps both motors in a selected direction
+     * 
+     * @param dir {bool} Which direction to step; { 0 = CCW, 1 = CW }
+     * @return true if step happened
+     * @return false if step didn't happen
+     */
+    bool step(bool dir);
 
 
     /**
@@ -107,6 +119,7 @@ private:
 
     unsigned long _currentMillis;
     unsigned long _targetMillis[2];
+    unsigned long _targetMillisBoth;
     uint8_t _delayAmount;
 
     uint8_t _currentStep[2];
