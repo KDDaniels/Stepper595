@@ -1,6 +1,6 @@
 [![arduino-library-badge](https://www.ardu-badge.com/badge/Stepper595.svg?)](https://www.ardu-badge.com/Stepper595)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/KDaniels-dev/Stepper595)
-![GitHub](https://img.shields.io/github/license/KDaniels-dev/Stepper595)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/KDDaniels/Stepper595)
+![GitHub](https://img.shields.io/github/license/KDDaniels/Stepper595)
 
 
 
