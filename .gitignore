@@ -1,0 +1,7 @@
+.pio
+.vscode
+.vscode/*
+lib/*
+src/main.cpp
+src/tinySPI.cpp
+include/tinySPI.h

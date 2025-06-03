@@ -20,13 +20,9 @@
 */
 
 
-#include "Stepper595.hpp"
-
-#if defined(__AVR_ATtiny85__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny25__) || defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny24__)
-    #include <tinySPI.h>
-#else
-    #include <SPI.h>
-#endif
+#include "Stepper595.h"
+#include "tinySPI.h"
+#include <tinyTime.h>
 
 /**
  * @brief Construct a new Stepper595 object
@@ -68,8 +64,8 @@ void Stepper595::initialize()
         _targetMillis[i] = millis();
     }
 
-    pinMode(_latch, OUTPUT);
-    digitalWrite(_latch, HIGH);
+    DDRB |= (1 << _latch);
+    PORTB |= (1 << _latch);
 }
 
 
@@ -102,9 +98,9 @@ bool Stepper595::step(bool motor, bool dir)
             _data = _data << 4;
         }
 
-        digitalWrite(_latch, LOW);
+        PORTB &= ~(1 << _latch);
         SPI.transfer(_data);
-        digitalWrite(_latch, HIGH);
+        PORTB |= (1 << _latch);
     
         if (dir == CCW)
         {
@@ -138,9 +134,9 @@ bool Stepper595::step(bool dir)
         _data = _pattern[_currentStep[0]];
         _data = (_data << 4 ) | _data; // Shift data over 4 bits and then OR the data onto the end to end up with 0b10011001 or whatever
 
-        digitalWrite(_latch, LOW);
+        PORTB &= ~(1 << _latch);
         SPI.transfer(_data);
-        digitalWrite(_latch, HIGH);
+        PORTB |= (1 << _latch);
     
         if (dir == CCW)
         {
@@ -172,9 +168,9 @@ bool Stepper595::step(bool dir)
  */
 void Stepper595::stop()
 {
-    digitalWrite(_latch, LOW);
+    PORTB &= ~(1 << _latch);
     SPI.transfer(0b00000000);
-    digitalWrite(_latch, HIGH);
+    PORTB |= (1 << _latch);
 }
 
 /**
@@ -186,15 +182,15 @@ void Stepper595::stop(bool motor=0)
 {
     if (!motor) // MOTOR_1
     {
-        digitalWrite(_latch, LOW);
+        PORTB &= ~(1 << _latch);
         SPI.transfer(0b0000);
-        digitalWrite(_latch, HIGH);
+        PORTB |= (1 << _latch);
     }
     else // MOTOR_2
     {
-        digitalWrite(_latch, LOW);
+        PORTB &= ~(1 << _latch);
         SPI.transfer(0b0000 << 4); // I know it's the same as calling stop() but it's clearer this way (I think)
-        digitalWrite(_latch, HIGH);
+        PORTB |= (1 << _latch);
     }
 }
 

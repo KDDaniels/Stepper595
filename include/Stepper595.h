@@ -36,7 +36,7 @@
 #ifndef STEPPER595_HPP
 #define STEPPER595_HPP
 
-#include <Arduino.h>
+#include <stdint.h>
 
 #define MOTOR_1 0
 #define MOTOR_2 1
